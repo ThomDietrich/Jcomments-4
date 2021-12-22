@@ -9,6 +9,8 @@
  * @license       GNU/GPL: http://www.gnu.org/copyleft/gpl.html
  */
 
+namespace JcommentsTeam\Component\Jcomments\Site\Model;
+
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Cache\CacheControllerFactoryInterface;
@@ -24,7 +26,7 @@ use Joomla\CMS\Table\Table;
  *
  * @since  4.0
  */
-class JcommentsModelSubscriptions extends BaseDatabaseModel implements DatabaseModelInterface
+class SubscriptionsModel extends BaseDatabaseModel implements DatabaseModelInterface
 {
 	/**
 	 * Add a new subscription.

@@ -11,6 +11,7 @@
 
 defined('_JEXEC') or die;
 
+use JcommentsTeam\Component\Jcomments\Site\Model\SubscriptionsModel;
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
@@ -104,8 +105,8 @@ class JcommentsControllerSubscriptions extends BaseController
 			return;
 		}
 
-		/** @var JcommentsModelSubscriptions $model */
-		$model = $this->getModel('subscriptions');
+		/** @var SubscriptionsModel $model */
+		$model = $this->getModel('SubscriptionsModel');
 
 		if ($state === 1)
 		{
@@ -147,8 +148,8 @@ class JcommentsControllerSubscriptions extends BaseController
 	 */
 	public function unsubscribeByHash($hash)
 	{
-		/** @var JcommentsModelSubscriptions $model */
-		$model = $this->getModel('subscriptions');
+		/** @var SubscriptionsModel $model */
+		$model = $this->getModel('SubscriptionsModel');
 		$result = $model->unsubscribeByHash($hash);
 
 		if (!$result)

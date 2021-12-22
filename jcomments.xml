@@ -5,8 +5,9 @@
 	<author>JComments team</author>
 	<authorUrl>https://github.com/exstreme/Jcomments-4</authorUrl>
 	<license>https://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
-	<version>4.0.11</version>
+	<version>4.1.0</version>
 	<description>JComments lets your users comment on content items.</description>
+	<namespace>JcommentsTeam\Component\Jcomments</namespace>
 
 	<install>
 		<sql>
@@ -23,7 +24,7 @@
 	</update>
 
 	<files folder="site">
-		<filename>jcomments.php</filename>
+		<filename>JComments.php</filename>
 		<filename>jcomments.ajax.php</filename>
 		<filename>jcomments.captcha.php</filename>
 		<filename>jcomments.class.php</filename>

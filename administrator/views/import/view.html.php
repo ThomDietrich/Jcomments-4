@@ -25,7 +25,7 @@ class JCommentsViewImport extends HtmlView
 
 	function display($tpl = null)
 	{
-		require_once JPATH_COMPONENT . '/helpers/jcomments.php';
+		require_once JPATH_COMPONENT . '/helpers/JComments.php';
 
 		$this->items = $this->get('Items');
 		$this->state = $this->get('State');

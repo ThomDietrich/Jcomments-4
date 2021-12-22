@@ -11,6 +11,7 @@
 
 defined('_JEXEC') or die;
 
+use JcommentsTeam\Component\Jcomments\Site\Model\SubscriptionsModel;
 use Joomla\CMS\Cache\Cache;
 use Joomla\CMS\Cache\CacheControllerFactoryInterface;
 use Joomla\CMS\Cache\Controller\CallbackController;
@@ -31,10 +32,8 @@ if (!defined('JOOMLATUNE_AJAX'))
 	require_once JPATH_ROOT . '/components/com_jcomments/libraries/joomlatune/ajax.php';
 }
 
-if ((version_compare(phpversion(), '5.1.0') >= 0))
-{
-	date_default_timezone_set('UTC');
-}
+//TODO: Refactor this
+date_default_timezone_set('UTC');
 
 Table::addIncludePath(JPATH_ROOT . '/administrator/components/com_jcomments/tables');
 
@@ -526,10 +525,8 @@ class JCommentsAJAX
 					// Save comments subscription
 					if ($values['subscribe'])
 					{
-						require_once JPATH_ROOT . '/components/com_jcomments/jcomments.subscription.php';
-
-						$manager = JCommentsSubscriptionManager::getInstance();
-						$manager->subscribe($comment->object_id, $comment->object_group, $comment->userid, $comment->email, $comment->name, $comment->lang);
+                        $subscriptionModel = new SubscriptionsModel;
+                        $subscriptionModel->subscribe($comment->object_id, $comment->object_group, $comment->userid, $comment->email, $comment->name, $comment->lang);
 					}
 
 					$merged    = false;

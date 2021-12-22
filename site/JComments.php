@@ -11,6 +11,7 @@
 
 defined('_JEXEC') or die;
 
+use JcommentsTeam\Component\Jcomments\Site\Model\SubscriptionsModel;
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
@@ -31,7 +32,7 @@ const _JC_REGEXP_EMAIL = '#([\w\.\-]+)@(\w+[\w\.\-]*\.\w{2,6})#iu';
 const _JC_REGEXP_EMAIL2 = '#^([_a-z0-9-]+)(\.[_a-z0-9-]+)*@([a-z0-9-]+)(\.[a-z0-9-]+)*(\.[a-z]{2,6})$#iu';
 
 require_once JPATH_ROOT . '/components/com_jcomments/jcomments.class.php';
-require_once JPATH_ROOT . '/components/com_jcomments/models/jcomments.php';
+require_once JPATH_ROOT . '/components/com_jcomments/models/JComments.php';
 ob_end_clean();
 
 $app = Factory::getApplication();
@@ -545,9 +546,7 @@ class JComments
 
 			if ($user->get('id') && $canSubscribe)
 			{
-				require_once JPATH_ROOT . '/components/com_jcomments/models/subscriptions.php';
-
-				$subscriptionModel = new JcommentsModelSubscriptions;
+				$subscriptionModel = new SubscriptionsModel;
 				$canSubscribe = (!$subscriptionModel->isSubscribed($objectID, $objectGroup, $user->get('id')));
 			}
 
@@ -803,9 +802,7 @@ class JComments
 
 			if ($user->get('id') && $user->authorise('comment.subscribe', 'com_jcomments'))
 			{
-				require_once JPATH_ROOT . '/components/com_jcomments/models/subscriptions.php';
-
-				$subscriptionModel = new JcommentsModelSubscriptions;
+				$subscriptionModel = new SubscriptionsModel;
 				$isSubscribed = $subscriptionModel->isSubscribed($objectID, $objectGroup, $user->get('id'));
 				$tmpl->addVar('tpl_list', 'comments-user-subscribed', $isSubscribed);
 			}
@@ -963,9 +960,7 @@ class JComments
 
 			if ($user->get('id') && $user->authorise('comment.subscribe', 'com_jcomments'))
 			{
-				require_once JPATH_ROOT . '/components/com_jcomments/models/subscriptions.php';
-
-				$subscriptionModel = new JcommentsModelSubscriptions;
+				$subscriptionModel = new SubscriptionsModel;
 				$isSubscribed = $subscriptionModel->isSubscribed($objectID, $objectGroup, $user->get('id'));
 				$tmpl->addVar('tpl_tree', 'comments-user-subscribed', $isSubscribed);
 			}

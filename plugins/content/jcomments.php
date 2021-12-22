@@ -2,7 +2,7 @@
 /**
  * JComments - Joomla Comment System
  *
- * @version       3.0
+ * @version       4.0
  * @package       JComments
  * @author        Sergey M. Litvinov (smart@joomlatune.ru)
  * @copyright (C) 2006-2022 by Sergey M. Litvinov (http://www.joomlatune.ru) & exstreme (https://protectyoursite.ru) & Vladimir Globulopolis (https://xn--80aeqbhthr9b.com/ru/)
@@ -11,6 +11,7 @@
 
 defined('_JEXEC') or die;
 
+use JcommentsTeam\Component\Jcomments\Site\Model\SubscriptionsModel;
 use Joomla\CMS\Access\Access;
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
@@ -21,6 +22,7 @@ use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Uri\Uri;
 use Joomla\Registry\Registry;
+use JcommentsTeam\Component\Jcomments\Site\JComments;
 
 /**
  * Plugin for attaching comments list and form to content item
@@ -197,7 +199,7 @@ class PlgContentJcomments extends CMSPlugin
 			// Do not query comments count if comments disabled and link hidden
 			if (!$commentsDisabled)
 			{
-				require_once JPATH_ROOT . '/components/com_jcomments/models/jcomments.php';
+				require_once JPATH_ROOT . '/components/com_jcomments/models/JComments.php';
 
 				$anchor = "";
 
@@ -278,8 +280,6 @@ class PlgContentJcomments extends CMSPlugin
 
 				if ($isEnabled && $view == 'article')
 				{
-					require_once JPATH_ROOT . '/components/com_jcomments/jcomments.php';
-
 					$comments = JComments::show($article->id, 'com_content', $article->title);
 
 					if (strpos($article->text, '{jcomments}') !== false)
@@ -321,8 +321,6 @@ class PlgContentJcomments extends CMSPlugin
 
 				return '';
 			}
-
-			require_once JPATH_ROOT . '/components/com_jcomments/jcomments.php';
 
 			$config    = ComponentHelper::getParams('com_jcomments');
 			$isEnabled = ((int) $config->get('comments_on', 0) == 1) && ((int) $config->get('comments_off', 0) == 0);
@@ -413,12 +411,11 @@ class PlgContentJcomments extends CMSPlugin
 	{
 		if ($context == 'com_content.article')
 		{
-			require_once JPATH_ROOT . '/components/com_jcomments/models/jcomments.php';
-			require_once JPATH_ROOT . '/components/com_jcomments/models/subscriptions.php';
+			require_once JPATH_ROOT . '/components/com_jcomments/models/JComments.php';
 
 			JCommentsModel::deleteComments($data->id);
 
-			$model = new JcommentsModelSubscriptions;
+			$model = new SubscriptionsModel;
 
 			return $model->unsubscribe($data->id, 'com_content');
 		}

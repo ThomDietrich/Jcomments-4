@@ -206,8 +206,6 @@ class JCommentsNotification
 	 */
 	private static function prepareData($data, $type)
 	{
-		require_once JPATH_ROOT . '/components/com_jcomments/jcomments.php';
-
 		$object = JCommentsObject::getObjectInfo($data['comment']->object_id, $data['comment']->object_group, $data['comment']->lang);
 		$config = ComponentHelper::getParams('com_jcomments');
 

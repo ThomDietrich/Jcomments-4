@@ -14,6 +14,7 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\Utilities\ArrayHelper;
+use JcommentsTeam\Component\Jcomments\Site\JComments;
 
 include_once(JPATH_ROOT . '/components/com_jcomments/helpers/system.php');
 
@@ -151,7 +152,6 @@ class plgSystemJComments extends CMSPlugin
 				{
 					$cid = $app->input->post->get('cid', array(), 'array');
 					ArrayHelper::toInteger($cid, array(0));
-					include_once(JPATH_ROOT . '/components/com_jcomments/jcomments.php');
 					JCommentsModel::deleteComments($cid, 'com_content');
 				}
 			}
@@ -207,23 +207,11 @@ class plgSystemJComments extends CMSPlugin
 
 	public function onJCommentsShow($object_id, $object_group, $object_title)
 	{
-		$coreFile = JPATH_ROOT . '/components/com_jcomments/jcomments.php';
-
-		if (is_file($coreFile))
-		{
-			include_once($coreFile);
-			echo JComments::show($object_id, $object_group, $object_title);
-		}
+	    echo JComments::show($object_id, $object_group, $object_title);
 	}
 
 	public function onJCommentsCount($object_id, $object_group)
 	{
-		$coreFile = JPATH_ROOT . '/components/com_jcomments/jcomments.php';
-
-		if (is_file($coreFile))
-		{
-			include_once($coreFile);
-			echo JComments::getCommentsCount($object_id, $object_group);
-		}
+	    echo JComments::getCommentsCount($object_id, $object_group);
 	}
 }
