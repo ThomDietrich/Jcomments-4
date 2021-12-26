@@ -25,8 +25,8 @@
 
 	<files folder="site">
 		<filename>JComments.php</filename>
-		<filename>jcomments.ajax.php</filename>
-		<filename>jcomments.captcha.php</filename>
+		<filename>JCommentsAJAX.php</filename>
+		<filename>JCommentsCaptcha.php</filename>
 		<filename>jcomments.class.php</filename>
 
 		<folder>classes</folder>

@@ -1,5 +1,5 @@
 <?php
-namespace JcommentsTeam\Component\Jcomments\Site\libraries\joomlatune;
+namespace JcommentsTeam\Component\Jcomments\Site\Libraries\Joomlatune;
 
 defined('_JEXEC') or die;
 

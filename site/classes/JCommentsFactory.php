@@ -13,6 +13,7 @@ namespace JcommentsTeam\Component\Jcomments\Site\classes;
 defined('_JEXEC') or die;
 
 use JcommentsTeam\Component\Jcomments\Site\Helpers\JCommentsObject;
+use JcommentsTeam\Component\Jcomments\Site\Libraries\Joomlatune\JcommentsAjaxResponse;
 use JcommentsTeam\Component\Jcomments\Site\libraries\joomlatune\JoomlaTuneTemplateRender;
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
@@ -157,10 +158,10 @@ class JCommentsFactory
 	}
 
 	/**
-	 * Returns a reference to the global {@link JoomlaTuneAjaxResponse} object,
+	 * Returns a reference to the global {@link JcommentsAjaxResponse} object,
 	 * only creating it if it doesn't already exist.
 	 *
-	 * @return JoomlaTuneAjaxResponse
+	 * @return JcommentsAjaxResponse
 	 */
 	public static function getAjaxResponse()
 	{
@@ -168,7 +169,7 @@ class JCommentsFactory
 
 		if (!is_object($instance))
 		{
-			$instance = new JoomlaTuneAjaxResponse('utf-8');
+			$instance = new JcommentsAjaxResponse('utf-8');
 		}
 
 		return $instance;

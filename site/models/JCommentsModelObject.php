@@ -60,7 +60,7 @@ class JCommentsModelObject
 				->set($db->quoteName('access') . ' = ' . (int) $info->access)
 				->set($db->quoteName('userid') . ' = ' . (int) $info->userid)
 				->set($db->quoteName('expired') . ' = 0')
-				->set($db->quoteName('modified') . ' = ' . $db->quote(JFactory::getDate()->toSql()));
+				->set($db->quoteName('modified') . ' = ' . $db->quote(Factory::getDate()->toSql()));
 
 			if (empty($info->title))
 			{

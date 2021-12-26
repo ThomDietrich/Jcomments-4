@@ -14,10 +14,14 @@ defined('_JEXEC') or die;
 
 use JcommentsTeam\Component\Jcomments\Site\classes\JCommentsFactory;
 use JcommentsTeam\Component\Jcomments\Site\classes\JCommentsSecurity;
+use JcommentsTeam\Component\Jcomments\Site\classes\JCommentsText;
+use JcommentsTeam\Component\Jcomments\Site\Helpers\JCommentsContent;
 use JcommentsTeam\Component\Jcomments\Site\Helpers\JCommentsEvent;
 use JcommentsTeam\Component\Jcomments\Site\Helpers\JCommentsNotification;
+use JcommentsTeam\Component\Jcomments\Site\Helpers\JCommentsObject;
 use JcommentsTeam\Component\Jcomments\Site\Helpers\JCommentsPagination;
 use JcommentsTeam\Component\Jcomments\Site\Helpers\JCommentsSystem;
+use JcommentsTeam\Component\Jcomments\Site\Libraries\Joomlatune\JoomlaTuneAjax;
 use JcommentsTeam\Component\Jcomments\Site\Models\JCommentsModel;
 use JcommentsTeam\Component\Jcomments\Site\Models\SubscriptionsModel;
 use Joomla\CMS\Component\ComponentHelper;
@@ -27,10 +31,6 @@ use Joomla\CMS\MVC\Controller\BaseController;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Table\Table;
 use Joomla\CMS\Uri\Uri;
-use Joomla\String\StringHelper;
-
-error_reporting(E_ALL);
-@ini_set('error_reporting', E_ALL);
 
 ob_start();
 
@@ -56,8 +56,6 @@ switch ($task)
 
 		if ($captchaEngine == 'kcaptcha' || (int) $config->get('enable_plugins') == 0)
 		{
-			require_once JPATH_ROOT . '/components/com_jcomments/jcomments.captcha.php';
-
 			JCommentsCaptcha::image();
 		}
 		else
@@ -84,8 +82,6 @@ switch ($task)
 
 		break;
 	case 'refreshObjectsAjax':
-		require_once JPATH_ROOT . '/components/com_jcomments/jcomments.ajax.php';
-
 		JCommentsAJAX::refreshObjectsAjax();
 
 		jexit();
@@ -170,25 +166,23 @@ switch ($task)
 
 if (isset($_REQUEST['jtxf']))
 {
-	require_once JPATH_ROOT . '/components/com_jcomments/jcomments.ajax.php';
-
 	$jtx = new JoomlaTuneAjax;
 	$jtx->setCharEncoding('utf-8');
-	$jtx->registerFunction(array('JCommentsAddComment', 'JCommentsAJAX', 'addComment'));
-	$jtx->registerFunction(array('JCommentsDeleteComment', 'JCommentsAJAX', 'deleteComment'));
-	$jtx->registerFunction(array('JCommentsEditComment', 'JCommentsAJAX', 'editComment'));
-	$jtx->registerFunction(array('JCommentsCancelComment', 'JCommentsAJAX', 'cancelComment'));
-	$jtx->registerFunction(array('JCommentsSaveComment', 'JCommentsAJAX', 'saveComment'));
-	$jtx->registerFunction(array('JCommentsPublishComment', 'JCommentsAJAX', 'publishComment'));
-	$jtx->registerFunction(array('JCommentsQuoteComment', 'JCommentsAJAX', 'quoteComment'));
-	$jtx->registerFunction(array('JCommentsShowPage', 'JCommentsAJAX', 'showPage'));
-	$jtx->registerFunction(array('JCommentsShowComment', 'JCommentsAJAX', 'showComment'));
-	$jtx->registerFunction(array('JCommentsJump2email', 'JCommentsAJAX', 'jump2email'));
-	$jtx->registerFunction(array('JCommentsShowForm', 'JCommentsAJAX', 'showForm'));
-	$jtx->registerFunction(array('JCommentsVoteComment', 'JCommentsAJAX', 'voteComment'));
-	$jtx->registerFunction(array('JCommentsShowReportForm', 'JCommentsAJAX', 'showReportForm'));
-	$jtx->registerFunction(array('JCommentsReportComment', 'JCommentsAJAX', 'reportComment'));
-	$jtx->registerFunction(array('JCommentsBanIP', 'JCommentsAJAX', 'BanIP'));
+	$jtx->registerFunction(array('JCommentsAddComment', 'JcommentsTeam\Component\Jcomments\Site\JCommentsAJAX', 'addComment'));
+	$jtx->registerFunction(array('JCommentsDeleteComment', 'JcommentsTeam\Component\Jcomments\Site\JCommentsAJAX', 'deleteComment'));
+	$jtx->registerFunction(array('JCommentsEditComment', 'JcommentsTeam\Component\Jcomments\Site\JCommentsAJAX', 'editComment'));
+	$jtx->registerFunction(array('JCommentsCancelComment', 'JcommentsTeam\Component\Jcomments\Site\JCommentsAJAX', 'cancelComment'));
+	$jtx->registerFunction(array('JCommentsSaveComment', 'JcommentsTeam\Component\Jcomments\Site\JCommentsAJAX', 'saveComment'));
+	$jtx->registerFunction(array('JCommentsPublishComment', 'JcommentsTeam\Component\Jcomments\Site\JCommentsAJAX', 'publishComment'));
+	$jtx->registerFunction(array('JCommentsQuoteComment', 'JcommentsTeam\Component\Jcomments\Site\JCommentsAJAX', 'quoteComment'));
+	$jtx->registerFunction(array('JCommentsShowPage', 'JcommentsTeam\Component\Jcomments\Site\JCommentsAJAX', 'showPage'));
+	$jtx->registerFunction(array('JCommentsShowComment', 'JcommentsTeam\Component\Jcomments\Site\JCommentsAJAX', 'showComment'));
+	$jtx->registerFunction(array('JCommentsJump2email', 'JcommentsTeam\Component\Jcomments\Site\JCommentsAJAX', 'jump2email'));
+	$jtx->registerFunction(array('JCommentsShowForm', 'JcommentsTeam\Component\Jcomments\Site\JCommentsAJAX', 'showForm'));
+	$jtx->registerFunction(array('JCommentsVoteComment', 'JcommentsTeam\Component\Jcomments\Site\JCommentsAJAX', 'voteComment'));
+	$jtx->registerFunction(array('JCommentsShowReportForm', 'JcommentsTeam\Component\Jcomments\Site\JCommentsAJAX', 'showReportForm'));
+	$jtx->registerFunction(array('JCommentsReportComment', 'JcommentsTeam\Component\Jcomments\Site\JCommentsAJAX', 'reportComment'));
+	$jtx->registerFunction(array('JCommentsBanIP', 'JcommentsTeam\Component\Jcomments\Site\JCommentsAJAX', 'BanIP'));
 	$jtx->processRequests();
 }
 
@@ -1213,7 +1207,7 @@ class JComments
 		// Autolink urls
 		if ($user->authorise('comment.autolink', 'com_jcomments'))
 		{
-			$comment->comment = preg_replace_callback(_JC_REGEXP_LINK, array('JComments', 'urlProcessor'), $comment->comment);
+			$comment->comment = preg_replace_callback(_JC_REGEXP_LINK, array('JcommentsTeam\Component\Jcomments\Site\Helpers\JCommentsContent', 'urlProcessor'), $comment->comment);
 
 			if (!$user->authorise('comment.email.protect', 'com_jcomments'))
 			{
@@ -1269,94 +1263,6 @@ class JComments
 		}
 
 		return $text;
-	}
-
-	public static function urlProcessor($matches)
-	{
-		$link       = $matches[2];
-		$linkSuffix = '';
-
-		while (preg_match('#[\,\.]+#', $link[strlen($link) - 1]))
-		{
-			$sl          = strlen($link) - 1;
-			$linkSuffix .= $link[$sl];
-			$link        = StringHelper::substr($link, 0, $sl);
-		}
-
-		$linkText      = preg_replace('#(http|https|news|ftp)\:\/\/#i', '', $link);
-		$config        = ComponentHelper::getParams('com_jcomments');
-		$linkMaxlength = (int) $config->get('link_maxlength');
-
-		if (($linkMaxlength > 0) && (strlen($linkText) > $linkMaxlength))
-		{
-			$linkParts = preg_split('#\/#i', preg_replace('#/$#i', '', $linkText));
-			$cnt       = count($linkParts);
-
-			if ($cnt >= 2)
-			{
-				$linkSite     = $linkParts[0];
-				$linkDocument = $linkParts[$cnt - 1];
-				$shortLink    = $linkSite . '/.../' . $linkDocument;
-
-				if ($cnt == 2)
-				{
-					$shortLink = $linkSite . '/.../';
-				}
-				elseif (strlen($shortLink) > $linkMaxlength)
-				{
-					$linkSite       = str_replace('www.', '', $linkSite);
-					$linkSiteLength = strlen($linkSite);
-					$shortLink      = $linkSite . '/.../' . $linkDocument;
-
-					if (strlen($shortLink) > $linkMaxlength)
-					{
-						if ($linkSiteLength < $linkMaxlength)
-						{
-							$shortLink = $linkSite . '/.../...';
-						}
-						elseif ($linkDocument < $linkMaxlength)
-						{
-							$shortLink = '.../' . $linkDocument;
-						}
-						else
-						{
-							$linkProtocol = preg_replace('#([^a-z])#i', '', $matches[3]);
-
-							if ($linkProtocol == 'www')
-							{
-								$linkProtocol = 'http';
-							}
-
-							if ($linkProtocol != '')
-							{
-								$shortLink = $linkProtocol;
-							}
-							else
-							{
-								$shortLink = '/.../';
-							}
-						}
-					}
-				}
-
-				$linkText = wordwrap($shortLink, $linkMaxlength, ' ', true);
-			}
-			else
-			{
-				$linkText = wordwrap($linkText, $linkMaxlength, ' ', true);
-			}
-		}
-
-		$liveSite = trim(str_replace(Uri::root(true), '', str_replace('/administrator', '', Uri::root())), '/');
-
-		if (strpos($link, $liveSite) === false)
-		{
-			return $matches[1] . "<a href=\"" . ((StringHelper::substr($link, 0, 3) == 'www') ? "http://" : "") . $link . "\" target=\"_blank\" rel=\"external nofollow\">$linkText</a>" . $linkSuffix;
-		}
-		else
-		{
-			return $matches[1] . "<a href=\"$link\" target=\"_blank\">$linkText</a>" . $linkSuffix;
-		}
 	}
 
 	public static function getCommentPage($objectID, $objectGroup, $commentID)

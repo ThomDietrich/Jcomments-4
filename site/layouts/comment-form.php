@@ -11,9 +11,11 @@
 
 defined('_JEXEC') or die;
 
+use JcommentsTeam\Component\Jcomments\Site\classes\JCommentsFactory;
+use JcommentsTeam\Component\Jcomments\Site\classes\JCommentsText;
+use JcommentsTeam\Component\Jcomments\Site\libraries\joomlatune\JoomlaTuneTemplate;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
-use JcommentsTeam\Component\Jcomments\Site\libraries\joomlatune\JoomlaTuneTemplate;
 
 /** @var JoomlaTuneTemplate $displayData */
 $objectID    = $displayData->getVar('comment-object_id');

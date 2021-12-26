@@ -14,6 +14,7 @@
  *                    If you use this software as a part of own sofware, you must leave copyright notices intact or add
  *                    KCAPTCHA copyright notices to own.
  */
+namespace JcommentsTeam\Component\Jcomments\Site\Libraries\Kcaptcha;
 
 defined('_JEXEC') or die;
 
@@ -24,7 +25,7 @@ use Joomla\CMS\Filesystem\Path;
  *
  * @since    1.0.0
  */
-class KCAPTCHA
+class KCaptcha
 {
 	protected $alphabet = "0123456789abcdefghijklmnopqrstuvwxyz";
 

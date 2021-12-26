@@ -11,6 +11,8 @@
 
 defined('_JEXEC') or die;
 
+use JcommentsTeam\Component\Jcomments\Site\classes\JCommentsFactory;
+use JcommentsTeam\Component\Jcomments\Site\Models\JCommentsModel;
 use JcommentsTeam\Component\Jcomments\Site\Models\SubscriptionsModel;
 use JcommentsTeam\Component\Jcomments\Site\JComments;
 use JcommentsTeam\Component\Jcomments\Site\Helpers\JCommentsObject;
@@ -199,8 +201,6 @@ class PlgContentJcomments extends CMSPlugin
 			// Do not query comments count if comments disabled and link hidden
 			if (!$commentsDisabled)
 			{
-				require_once JPATH_ROOT . '/components/com_jcomments/models/JComments.php';
-
 				$anchor = "";
 
 				if ($this->params->get('comments_count', 1) != 0)
@@ -409,8 +409,6 @@ class PlgContentJcomments extends CMSPlugin
 	{
 		if ($context == 'com_content.article')
 		{
-			require_once JPATH_ROOT . '/components/com_jcomments/models/JComments.php';
-
 			JCommentsModel::deleteComments($data->id);
 
 			$model = new SubscriptionsModel;

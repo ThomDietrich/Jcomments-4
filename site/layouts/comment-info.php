@@ -11,6 +11,7 @@
 
 defined('_JEXEC') or die;
 
+use JcommentsTeam\Component\Jcomments\Site\JComments;
 use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;

@@ -4,19 +4,21 @@
  *
  * @version       4.0
  * @package       JComments
- * @filename      jcomments.captcha.php
+ * @filename      JCommentsCaptcha.php
  * @author        Sergey M. Litvinov (smart@joomlatune.ru) & exstreme (info@protectyoursite.ru) & Vladimir Globulopolis
  * @copyright (C) 2006-2022 by Sergey M. Litvinov (http://www.joomlatune.ru) & exstreme (https://protectyoursite.ru) & Vladimir Globulopolis (https://xn--80aeqbhthr9b.com/ru/)
  * @license       GNU/GPL: http://www.gnu.org/copyleft/gpl.html
  */
+namespace JcommentsTeam\Component\Jcomments\Site;
 
 defined('_JEXEC') or die;
 
+use JcommentsTeam\Component\Jcomments\Site\Libraries\Kcaptcha\KCaptcha;
 use Joomla\CMS\Component\ComponentHelper;
 
 /**
  * CAPTCHA - Automatic test to tell computers and humans apart
- *
+ * TODO: move class to another place
  * @since  4.0
  */
 class JCommentsCaptcha
@@ -50,11 +52,6 @@ class JCommentsCaptcha
 
 		@session_start();
 
-		if (!class_exists('KCAPTCHA'))
-		{
-			require_once JPATH_ROOT . '/components/com_jcomments/libraries/kcaptcha/kcaptcha.php';
-		}
-
 		$config = ComponentHelper::getParams('com_jcomments');
 		$captchaOptions = array();
 
@@ -68,7 +65,7 @@ class JCommentsCaptcha
 			}
 		}
 
-		$captcha = new KCAPTCHA($captchaOptions);
+		$captcha = new KCaptcha($captchaOptions);
 		$captcha->render();
 		$_SESSION['comments-captcha-code'] = $captcha->getKeyString();
 		exit;

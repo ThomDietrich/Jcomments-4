@@ -85,7 +85,7 @@ class JCommentsObject
 	{
 		if (!is_callable(array($class, $methodName)))
 		{
-			$class = new JCommentsPlugin;
+			$class = new \JcommentsTeam\Component\Jcomments\Site\Classes\JCommentsPlugin;
 		}
 
 		return call_user_func_array(array($class, $methodName), $args);
@@ -100,7 +100,7 @@ class JCommentsObject
 		if (!isset($plugins[$objectGroup]))
 		{
 			ob_start();
-			include_once JPATH_ROOT . '/components/com_jcomments/plugins/' . $objectGroup . '.JCommentsPlugin.php';
+			include_once JPATH_ROOT . '/components/com_jcomments/plugins/' . $objectGroup . '.plugin.php';
 			ob_end_clean();
 
 			$className = 'jc_' . $objectGroup;
@@ -193,7 +193,7 @@ class JCommentsObject
 				/** @var CallbackController $cache */
 				$cache = Factory::getContainer()->get(CacheControllerFactoryInterface::class)
 					->createCacheController('callback', ['defaultgroup' => 'com_jcomments_objects_' . strtolower($objectGroup)]);
-				$info[$key] = $cache->get(array('JCommentsObject', 'fetchObjectInfo'), array($objectID, $objectGroup, $language));
+				$info[$key] = $cache->get(array('JcommentsTeam\Component\Jcomments\Site\Helpers\JCommentsObject', 'fetchObjectInfo'), array($objectID, $objectGroup, $language));
 			}
 			else
 			{

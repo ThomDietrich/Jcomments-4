@@ -11,6 +11,7 @@
 
 defined('_JEXEC') or die;
 
+use JcommentsTeam\Component\Jcomments\Site\classes\JCommentsObjectInfo;
 use Joomla\CMS\Access\Access;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Router\Route;

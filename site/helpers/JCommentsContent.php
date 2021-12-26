@@ -13,6 +13,8 @@ namespace JcommentsTeam\Component\Jcomments\Site\Helpers;
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Component\ComponentHelper;
+use Joomla\CMS\Uri\Uri;
+use Joomla\String\StringHelper;
 
 /**
  * JComments Content Plugin Helper
@@ -188,4 +190,92 @@ class JCommentsContent
 
 		return $name;
 	}
+
+    public static function urlProcessor($matches)
+    {
+        $link       = $matches[2];
+        $linkSuffix = '';
+
+        while (preg_match('#[\,\.]+#', $link[strlen($link) - 1]))
+        {
+            $sl          = strlen($link) - 1;
+            $linkSuffix .= $link[$sl];
+            $link        = StringHelper::substr($link, 0, $sl);
+        }
+
+        $linkText      = preg_replace('#(http|https|news|ftp)\:\/\/#i', '', $link);
+        $config        = ComponentHelper::getParams('com_jcomments');
+        $linkMaxlength = (int) $config->get('link_maxlength');
+
+        if (($linkMaxlength > 0) && (strlen($linkText) > $linkMaxlength))
+        {
+            $linkParts = preg_split('#\/#i', preg_replace('#/$#i', '', $linkText));
+            $cnt       = count($linkParts);
+
+            if ($cnt >= 2)
+            {
+                $linkSite     = $linkParts[0];
+                $linkDocument = $linkParts[$cnt - 1];
+                $shortLink    = $linkSite . '/.../' . $linkDocument;
+
+                if ($cnt == 2)
+                {
+                    $shortLink = $linkSite . '/.../';
+                }
+                elseif (strlen($shortLink) > $linkMaxlength)
+                {
+                    $linkSite       = str_replace('www.', '', $linkSite);
+                    $linkSiteLength = strlen($linkSite);
+                    $shortLink      = $linkSite . '/.../' . $linkDocument;
+
+                    if (strlen($shortLink) > $linkMaxlength)
+                    {
+                        if ($linkSiteLength < $linkMaxlength)
+                        {
+                            $shortLink = $linkSite . '/.../...';
+                        }
+                        elseif ($linkDocument < $linkMaxlength)
+                        {
+                            $shortLink = '.../' . $linkDocument;
+                        }
+                        else
+                        {
+                            $linkProtocol = preg_replace('#([^a-z])#i', '', $matches[3]);
+
+                            if ($linkProtocol == 'www')
+                            {
+                                $linkProtocol = 'http';
+                            }
+
+                            if ($linkProtocol != '')
+                            {
+                                $shortLink = $linkProtocol;
+                            }
+                            else
+                            {
+                                $shortLink = '/.../';
+                            }
+                        }
+                    }
+                }
+
+                $linkText = wordwrap($shortLink, $linkMaxlength, ' ', true);
+            }
+            else
+            {
+                $linkText = wordwrap($linkText, $linkMaxlength, ' ', true);
+            }
+        }
+
+        $liveSite = trim(str_replace(Uri::root(true), '', str_replace('/administrator', '', Uri::root())), '/');
+
+        if (strpos($link, $liveSite) === false)
+        {
+            return $matches[1] . "<a href=\"" . ((StringHelper::substr($link, 0, 3) == 'www') ? "http://" : "") . $link . "\" target=\"_blank\" rel=\"external nofollow\">$linkText</a>" . $linkSuffix;
+        }
+        else
+        {
+            return $matches[1] . "<a href=\"$link\" target=\"_blank\">$linkText</a>" . $linkSuffix;
+        }
+    }
 }

@@ -8,10 +8,19 @@
  * @copyright (C) 2006-2022 by Sergey M. Litvinov (http://www.joomlatune.ru) & exstreme (https://protectyoursite.ru) & Vladimir Globulopolis (https://xn--80aeqbhthr9b.com/ru/)
  * @license       GNU/GPL: http://www.gnu.org/copyleft/gpl.html
  */
+namespace JcommentsTeam\Component\Jcomments\Site;
 
 defined('_JEXEC') or die;
 
+use JcommentsTeam\Component\Jcomments\Site\classes\JCommentsFactory;
+use JcommentsTeam\Component\Jcomments\Site\classes\JCommentsSecurity;
+use JcommentsTeam\Component\Jcomments\Site\classes\JCommentsText;
+use JcommentsTeam\Component\Jcomments\Site\Helpers\JCommentsContent;
+use JcommentsTeam\Component\Jcomments\Site\Helpers\JCommentsEvent;
+use JcommentsTeam\Component\Jcomments\Site\Helpers\JCommentsObject;
 use JcommentsTeam\Component\Jcomments\Site\Helpers\JCommentsPagination;
+use JcommentsTeam\Component\Jcomments\Site\Libraries\Joomlatune\JcommentsAjaxResponse;
+use JcommentsTeam\Component\Jcomments\Site\Models\JCommentsModel;
 use JcommentsTeam\Component\Jcomments\Site\Models\SubscriptionsModel;
 use Joomla\CMS\Cache\Cache;
 use Joomla\CMS\Cache\CacheControllerFactoryInterface;
@@ -27,11 +36,6 @@ use Joomla\Database\DatabaseDriver;
 use Joomla\String\StringHelper;
 
 ob_start();
-
-if (!defined('JOOMLATUNE_AJAX'))
-{
-	require_once JPATH_ROOT . '/components/com_jcomments/libraries/joomlatune/ajax.php';
-}
 
 //TODO: Refactor this
 date_default_timezone_set('UTC');
@@ -310,7 +314,6 @@ class JCommentsAJAX
 					switch ($captchaEngine)
 					{
 						case 'kcaptcha':
-							require_once JPATH_ROOT . '/components/com_jcomments/jcomments.captcha.php';
 
 							if (!JCommentsCaptcha::check($values['captcha_refid']))
 							{
@@ -698,8 +701,6 @@ class JCommentsAJAX
 					{
 						if ($config->get('captcha_engine', 'kcaptcha') == 'kcaptcha')
 						{
-							require_once JPATH_ROOT . '/components/com_jcomments/jcomments.captcha.php';
-
 							JCommentsCaptcha::destroy();
 							$response->addScript("jcomments.clear('captcha');");
 						}
@@ -833,7 +834,7 @@ class JCommentsAJAX
 	 *
 	 * @param   integer  $id  Comment ID
 	 *
-	 * @return  JoomlaTuneAjaxResponse|null
+	 * @return  JcommentsAjaxResponse|null
 	 *
 	 * @see     JCommentsPublishComment
 	 * @since   3.0
@@ -1196,7 +1197,7 @@ class JCommentsAJAX
 	 * @param   string   $hash   Email hash.
 	 * @param   boolean  $email  Search and replace only in email address, in comment text otherwise.
 	 *
-	 * @return  JoomlaTuneAjaxResponse
+	 * @return  JcommentsAjaxResponse
 	 *
 	 * @since   3.0
 	 */
