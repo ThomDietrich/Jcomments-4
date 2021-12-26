@@ -8,9 +8,11 @@
  * @copyright (C) 2006-2022 by Sergey M. Litvinov (http://www.joomlatune.ru) & exstreme (https://protectyoursite.ru) & Vladimir Globulopolis (https://xn--80aeqbhthr9b.com/ru/)
  * @license       GNU/GPL: http://www.gnu.org/copyleft/gpl.html
  */
+namespace JcommentsTeam\Component\Jcomments\Site\classes;
 
 defined('_JEXEC') or die;
 
+use JcommentsTeam\Component\Jcomments\Site\libraries\joomlatune\JoomlaTuneTemplateRender;
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Router\Route;
@@ -97,8 +99,6 @@ class JCommentsFactory
 			$templateName = 'default';
 			$config->set('template', $templateName);
 		}
-
-		include_once JPATH_ROOT . '/components/com_jcomments/libraries/joomlatune/template.php';
 
 		$templateDefaultDirectory = JPATH_ROOT . '/components/com_jcomments/tpl/' . $templateName;
 		$templateDirectory        = $templateDefaultDirectory;

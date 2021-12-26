@@ -12,6 +12,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Layout\LayoutHelper;
+use JcommentsTeam\Component\Jcomments\Site\libraries\joomlatune\JoomlaTuneTemplate;
 
 /**
  * Comment item template. Results of rendering used in tpl_list.php

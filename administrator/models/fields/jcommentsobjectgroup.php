@@ -54,7 +54,7 @@ class JFormFieldJCommentsObjectGroup extends ListField
 		{
 			foreach ($plugins as $plugin)
 			{
-				$pluginName = str_replace('.plugin.php', '', $plugin);
+				$pluginName = str_replace('.JCommentsPlugin.php', '', $plugin);
 
 				foreach ($components as $component)
 				{

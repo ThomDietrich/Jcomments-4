@@ -15,8 +15,8 @@ use Joomla\CMS\Access\Access;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Uri\Uri;
+use JcommentsTeam\Component\Jcomments\Site\classes\JCommentsPlugin;
 
-require_once JPATH_ROOT . '/components/com_jcomments/classes/plugin.php';
 
 class jc_com_content extends JCommentsPlugin
 {

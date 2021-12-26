@@ -11,6 +11,8 @@
 
 defined('_JEXEC') or die;
 
+use JcommentsTeam\Component\Jcomments\Site\libraries\joomlatune\JoomlaTuneTemplate;
+
 /**
  * Main template for JComments. Don't change it without serious reasons ;)
  * Then creating new template you can copy this file to new template's dir without changes

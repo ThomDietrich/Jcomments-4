@@ -8,9 +8,12 @@
  * @copyright (C) 2006-2022 by Sergey M. Litvinov (http://www.joomlatune.ru) & exstreme (https://protectyoursite.ru) & Vladimir Globulopolis (https://xn--80aeqbhthr9b.com/ru/)
  * @license       GNU/GPL: http://www.gnu.org/copyleft/gpl.html
  */
+namespace JcommentsTeam\Component\Jcomments\Site;
 
 defined('_JEXEC') or die;
 
+use JcommentsTeam\Component\Jcomments\Site\classes\JCommentsFactory;
+use JcommentsTeam\Component\Jcomments\Site\classes\JCommentsSecurity;
 use JcommentsTeam\Component\Jcomments\Site\Model\SubscriptionsModel;
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
@@ -32,7 +35,7 @@ const _JC_REGEXP_EMAIL = '#([\w\.\-]+)@(\w+[\w\.\-]*\.\w{2,6})#iu';
 const _JC_REGEXP_EMAIL2 = '#^([_a-z0-9-]+)(\.[_a-z0-9-]+)*@([a-z0-9-]+)(\.[a-z0-9-]+)*(\.[a-z]{2,6})$#iu';
 
 require_once JPATH_ROOT . '/components/com_jcomments/jcomments.class.php';
-require_once JPATH_ROOT . '/components/com_jcomments/models/JComments.php';
+require_once JPATH_ROOT . '/components/com_jcomments/models/jcomments.php';
 ob_end_clean();
 
 $app = Factory::getApplication();

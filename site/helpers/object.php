@@ -11,14 +11,14 @@
 
 defined('_JEXEC') or die;
 
+use JcommentsTeam\Component\Jcomments\Site\classes\JCommentsSecurity;
+use JcommentsTeam\Component\Jcomments\Site\classes\JCommentsObjectInfo;
 use Joomla\CMS\Cache\Cache;
 use Joomla\CMS\Cache\CacheControllerFactoryInterface;
 use Joomla\CMS\Cache\Controller\CallbackController;
 use Joomla\CMS\Factory;
 
 require_once JPATH_ROOT . '/components/com_jcomments/models/object.php';
-require_once JPATH_ROOT . '/components/com_jcomments/classes/objectinfo.php';
-require_once JPATH_ROOT . '/components/com_jcomments/classes/security.php';
 
 /**
  * JComments objects frontend helper
@@ -100,7 +100,7 @@ class JCommentsObject
 		if (!isset($plugins[$objectGroup]))
 		{
 			ob_start();
-			include_once JPATH_ROOT . '/components/com_jcomments/plugins/' . $objectGroup . '.plugin.php';
+			include_once JPATH_ROOT . '/components/com_jcomments/plugins/' . $objectGroup . '.JCommentsPlugin.php';
 			ob_end_clean();
 
 			$className = 'jc_' . $objectGroup;

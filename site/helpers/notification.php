@@ -19,9 +19,9 @@ use Joomla\CMS\Router\Route;
 use Joomla\CMS\Table\Table;
 use Joomla\CMS\Uri\Uri;
 use Joomla\Database\DatabaseDriver;
+use JcommentsTeam\Component\Jcomments\Site\classes\JCommentsFactory;
 
 // Used in administrator panel.
-require_once JPATH_ROOT . '/components/com_jcomments/classes/factory.php';
 
 /**
  * JComments Notification Helper

@@ -10,6 +10,7 @@
  */
 
 use Joomla\CMS\HTML\HTMLHelper;
+use JcommentsTeam\Component\Jcomments\Site\libraries\joomlatune\JoomlaTuneTemplate;
 
 defined('_JEXEC') or die;
 
