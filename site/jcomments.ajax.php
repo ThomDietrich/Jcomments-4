@@ -11,6 +11,7 @@
 
 defined('_JEXEC') or die;
 
+use JcommentsTeam\Component\Jcomments\Site\helpers\JCommentsPagination;
 use JcommentsTeam\Component\Jcomments\Site\Model\SubscriptionsModel;
 use Joomla\CMS\Cache\Cache;
 use Joomla\CMS\Cache\CacheControllerFactoryInterface;
@@ -788,8 +789,6 @@ class JCommentsAJAX
 							{
 								if ((int) $config->get('comments_per_page') > 0)
 								{
-									require_once JPATH_ROOT . '/components/com_jcomments/helpers/pagination.php';
-
 									$pagination = new JCommentsPagination($objectID, $objectGroup);
 									$pagination->setCommentsCount($count);
 									$currentPage = $pagination->getCommentPage($objectID, $objectGroup, $id);

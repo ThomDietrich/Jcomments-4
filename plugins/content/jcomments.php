@@ -12,6 +12,9 @@
 defined('_JEXEC') or die;
 
 use JcommentsTeam\Component\Jcomments\Site\Model\SubscriptionsModel;
+use JcommentsTeam\Component\Jcomments\Site\JComments;
+use JcommentsTeam\Component\Jcomments\Site\helpers\JCommentsObject;
+use JcommentsTeam\Component\Jcomments\Site\helpers\JCommentsContent;
 use Joomla\CMS\Access\Access;
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
@@ -22,7 +25,6 @@ use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Uri\Uri;
 use Joomla\Registry\Registry;
-use JcommentsTeam\Component\Jcomments\Site\JComments;
 
 /**
  * Plugin for attaching comments list and form to content item
@@ -31,8 +33,6 @@ class PlgContentJcomments extends CMSPlugin
 {
 	public function onPrepareContent(&$article, &$params)
 	{
-		require_once JPATH_ROOT . '/components/com_jcomments/helpers/content.php';
-
 		// Check whether plugin has been unpublished
 		if (!JPluginHelper::isEnabled('content', 'jcomments'))
 		{
@@ -303,8 +303,6 @@ class PlgContentJcomments extends CMSPlugin
 	{
 		if ($this->params->get('show_comments_event', 'onAfterDisplayContent') == 'onAfterDisplayContent')
 		{
-			require_once JPATH_ROOT . '/components/com_jcomments/helpers/content.php';
-
 			$app  = Factory::getApplication();
 			$view = $app->input->get('view');
 
@@ -438,12 +436,8 @@ class PlgContentJcomments extends CMSPlugin
 	{
 		if (($context == 'com_content.article' || $context == 'com_content.form') && !$isNew)
 		{
-			require_once JPATH_ROOT . '/components/com_jcomments/helpers/content.php';
-
 			if (JCommentsContent::checkCategory($article->catid))
 			{
-				require_once JPATH_ROOT . '/components/com_jcomments/helpers/object.php';
-
 				JCommentsObject::storeObjectInfo($article->id);
 			}
 		}

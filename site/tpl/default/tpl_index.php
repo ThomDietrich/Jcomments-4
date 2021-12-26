@@ -12,6 +12,7 @@
 defined('_JEXEC') or die;
 
 use JcommentsTeam\Component\Jcomments\Site\libraries\joomlatune\JoomlaTuneTemplate;
+use JcommentsTeam\Component\Jcomments\Site\helpers\JCommentsSystem;
 
 /**
  * Main template for JComments. Don't change it without serious reasons ;)
@@ -33,7 +34,6 @@ class jtt_tpl_index extends JoomlaTuneTemplate
 		if ($comments != '' || $form != '' || $this->getVar('comments-anticache')) {
 			// include comments css (only if we are in administor's panel)
 			if ($this->getVar('comments-css', 0) == 1) {
-				include_once (JPATH_ROOT . '/components/com_jcomments/helpers/system.php');
 ?>
 <link href="<?php echo JCommentsSystem::getCSS(); ?>" rel="stylesheet" type="text/css" />
 <?php

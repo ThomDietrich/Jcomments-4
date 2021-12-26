@@ -8,17 +8,17 @@
  * @copyright (C) 2006-2022 by Sergey M. Litvinov (http://www.joomlatune.ru) & exstreme (https://protectyoursite.ru) & Vladimir Globulopolis (https://xn--80aeqbhthr9b.com/ru/)
  * @license       GNU/GPL: http://www.gnu.org/copyleft/gpl.html
  */
+namespace JcommentsTeam\Component\Jcomments\Site\helpers;
 
 defined('_JEXEC') or die;
 
 use JcommentsTeam\Component\Jcomments\Site\classes\JCommentsSecurity;
 use JcommentsTeam\Component\Jcomments\Site\classes\JCommentsObjectInfo;
+use JcommentsTeam\Component\Jcomments\Site\Model\JCommentsModelObject;
 use Joomla\CMS\Cache\Cache;
 use Joomla\CMS\Cache\CacheControllerFactoryInterface;
 use Joomla\CMS\Cache\Controller\CallbackController;
 use Joomla\CMS\Factory;
-
-require_once JPATH_ROOT . '/components/com_jcomments/models/object.php';
 
 /**
  * JComments objects frontend helper
@@ -154,14 +154,10 @@ class JCommentsObject
 			// Get object information via plugins
 			$info = self::_loadObjectInfo($objectID, $objectGroup, $language);
 
-			if (!JCommentsModelObject::isEmpty($info))
-			{
-				if (!Factory::getApplication()->isClient('administrator'))
-				{
-					// Insert object information
-					JCommentsModelObject::setObjectInfo(0, $info);
-				}
-			}
+			if (!JCommentsModelObject::isEmpty($info) && !Factory::getApplication()->isClient('administrator')) {
+                // Insert object information
+                JCommentsModelObject::setObjectInfo(0, $info);
+            }
 		}
 
 		return $info;

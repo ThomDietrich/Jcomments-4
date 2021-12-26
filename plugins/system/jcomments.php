@@ -15,8 +15,7 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\Utilities\ArrayHelper;
 use JcommentsTeam\Component\Jcomments\Site\JComments;
-
-include_once(JPATH_ROOT . '/components/com_jcomments/helpers/system.php');
+use JcommentsTeam\Component\Jcomments\Site\helpers\JCommentsSystem;
 
 /**
  * System plugin for attaching JComments CSS & JavaScript to HEAD tag
@@ -162,7 +161,6 @@ class plgSystemJComments extends CMSPlugin
 				if ($option == 'com_content' || $option == 'com_alphacontent' || $option == 'com_multicategories')
 				{
 					include_once(JPATH_ROOT . '/components/com_jcomments/jcomments.class.php');
-					include_once(JPATH_ROOT . '/components/com_jcomments/helpers/system.php');
 
 					// include JComments CSS
 					if ($this->params->get('disable_template_css', 0) == 0)

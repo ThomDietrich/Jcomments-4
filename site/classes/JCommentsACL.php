@@ -12,6 +12,7 @@ namespace JcommentsTeam\Component\Jcomments\Site\classes;
 
 defined('_JEXEC') or die;
 
+use JcommentsTeam\Component\Jcomments\Site\helpers\JCommentsObject;
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
 

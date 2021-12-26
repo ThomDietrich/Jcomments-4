@@ -14,6 +14,11 @@ defined('_JEXEC') or die;
 
 use JcommentsTeam\Component\Jcomments\Site\classes\JCommentsFactory;
 use JcommentsTeam\Component\Jcomments\Site\classes\JCommentsSecurity;
+use JcommentsTeam\Component\Jcomments\Site\helpers\JCommentsEvent;
+use JcommentsTeam\Component\Jcomments\Site\helpers\JCommentsNotification;
+use JcommentsTeam\Component\Jcomments\Site\helpers\JCommentsPagination;
+use JcommentsTeam\Component\Jcomments\Site\helpers\JCommentsSystem;
+use JcommentsTeam\Component\Jcomments\Site\Model\JCommentsModel;
 use JcommentsTeam\Component\Jcomments\Site\Model\SubscriptionsModel;
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
@@ -35,7 +40,6 @@ const _JC_REGEXP_EMAIL = '#([\w\.\-]+)@(\w+[\w\.\-]*\.\w{2,6})#iu';
 const _JC_REGEXP_EMAIL2 = '#^([_a-z0-9-]+)(\.[_a-z0-9-]+)*@([a-z0-9-]+)(\.[a-z0-9-]+)*(\.[a-z]{2,6})$#iu';
 
 require_once JPATH_ROOT . '/components/com_jcomments/jcomments.class.php';
-require_once JPATH_ROOT . '/components/com_jcomments/models/jcomments.php';
 ob_end_clean();
 
 $app = Factory::getApplication();
@@ -235,8 +239,6 @@ class JComments
 
 		if (!defined('JCOMMENTS_CSS'))
 		{
-			include_once JPATH_ROOT . '/components/com_jcomments/helpers/system.php';
-
 			if ($app->isClient('administrator'))
 			{
 				$tmpl->addVar('tpl_index', 'comments-css', 1);
@@ -260,8 +262,6 @@ class JComments
 
 		if (!defined('JCOMMENTS_JS'))
 		{
-			include_once JPATH_ROOT . '/components/com_jcomments/helpers/system.php';
-
 			$document->addScript(JCommentsSystem::getCoreJS());
 
 			define('JCOMMENTS_JS', 1);
@@ -768,8 +768,6 @@ class JComments
 			if ($commentsPerPage > 0)
 			{
 				$page = (int) $page;
-
-				require_once JPATH_ROOT . '/components/com_jcomments/helpers/pagination.php';
 
 				$pagination = new JCommentsPagination($objectID, $objectGroup);
 				$pagination->setCurrentPage($page);
@@ -1369,8 +1367,6 @@ class JComments
 
 		if ((int) $config->get('comments_per_page') > 0)
 		{
-			require_once JPATH_ROOT . '/components/com_jcomments/helpers/pagination.php';
-
 			$pagination = new JCommentsPagination($objectID, $objectGroup);
 			$thisPage   = $pagination->getCommentPage($objectID, $objectGroup, $commentID);
 		}
