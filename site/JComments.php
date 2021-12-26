@@ -14,12 +14,12 @@ defined('_JEXEC') or die;
 
 use JcommentsTeam\Component\Jcomments\Site\classes\JCommentsFactory;
 use JcommentsTeam\Component\Jcomments\Site\classes\JCommentsSecurity;
-use JcommentsTeam\Component\Jcomments\Site\helpers\JCommentsEvent;
-use JcommentsTeam\Component\Jcomments\Site\helpers\JCommentsNotification;
-use JcommentsTeam\Component\Jcomments\Site\helpers\JCommentsPagination;
-use JcommentsTeam\Component\Jcomments\Site\helpers\JCommentsSystem;
-use JcommentsTeam\Component\Jcomments\Site\Model\JCommentsModel;
-use JcommentsTeam\Component\Jcomments\Site\Model\SubscriptionsModel;
+use JcommentsTeam\Component\Jcomments\Site\Helpers\JCommentsEvent;
+use JcommentsTeam\Component\Jcomments\Site\Helpers\JCommentsNotification;
+use JcommentsTeam\Component\Jcomments\Site\Helpers\JCommentsPagination;
+use JcommentsTeam\Component\Jcomments\Site\Helpers\JCommentsSystem;
+use JcommentsTeam\Component\Jcomments\Site\Models\JCommentsModel;
+use JcommentsTeam\Component\Jcomments\Site\Models\SubscriptionsModel;
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;

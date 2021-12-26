@@ -11,8 +11,8 @@
 
 defined('_JEXEC') or die;
 
-use JcommentsTeam\Component\Jcomments\Site\helpers\JCommentsPagination;
-use JcommentsTeam\Component\Jcomments\Site\Model\SubscriptionsModel;
+use JcommentsTeam\Component\Jcomments\Site\Helpers\JCommentsPagination;
+use JcommentsTeam\Component\Jcomments\Site\Models\SubscriptionsModel;
 use Joomla\CMS\Cache\Cache;
 use Joomla\CMS\Cache\CacheControllerFactoryInterface;
 use Joomla\CMS\Cache\Controller\CallbackController;

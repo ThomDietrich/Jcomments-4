@@ -12,7 +12,7 @@ namespace JcommentsTeam\Component\Jcomments\Site\classes;
 
 defined('_JEXEC') or die;
 
-use JcommentsTeam\Component\Jcomments\Site\helpers\JCommentsObject;
+use JcommentsTeam\Component\Jcomments\Site\Helpers\JCommentsObject;
 use JcommentsTeam\Component\Jcomments\Site\libraries\joomlatune\JoomlaTuneTemplateRender;
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;

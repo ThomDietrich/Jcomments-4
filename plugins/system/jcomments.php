@@ -15,7 +15,7 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\Utilities\ArrayHelper;
 use JcommentsTeam\Component\Jcomments\Site\JComments;
-use JcommentsTeam\Component\Jcomments\Site\helpers\JCommentsSystem;
+use JcommentsTeam\Component\Jcomments\Site\Helpers\JCommentsSystem;
 
 /**
  * System plugin for attaching JComments CSS & JavaScript to HEAD tag

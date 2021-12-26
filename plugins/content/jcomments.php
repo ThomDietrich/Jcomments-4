@@ -11,10 +11,10 @@
 
 defined('_JEXEC') or die;
 
-use JcommentsTeam\Component\Jcomments\Site\Model\SubscriptionsModel;
+use JcommentsTeam\Component\Jcomments\Site\Models\SubscriptionsModel;
 use JcommentsTeam\Component\Jcomments\Site\JComments;
-use JcommentsTeam\Component\Jcomments\Site\helpers\JCommentsObject;
-use JcommentsTeam\Component\Jcomments\Site\helpers\JCommentsContent;
+use JcommentsTeam\Component\Jcomments\Site\Helpers\JCommentsObject;
+use JcommentsTeam\Component\Jcomments\Site\Helpers\JCommentsContent;
 use Joomla\CMS\Access\Access;
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;

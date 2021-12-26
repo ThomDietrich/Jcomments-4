@@ -11,7 +11,7 @@
 
 defined('_JEXEC') or die;
 
-use JcommentsTeam\Component\Jcomments\Site\helpers\JCommentsNotification;
+use JcommentsTeam\Component\Jcomments\Site\Helpers\JCommentsNotification;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Table\Table;
 

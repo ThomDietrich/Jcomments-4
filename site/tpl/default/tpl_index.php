@@ -12,7 +12,7 @@
 defined('_JEXEC') or die;
 
 use JcommentsTeam\Component\Jcomments\Site\libraries\joomlatune\JoomlaTuneTemplate;
-use JcommentsTeam\Component\Jcomments\Site\helpers\JCommentsSystem;
+use JcommentsTeam\Component\Jcomments\Site\Helpers\JCommentsSystem;
 
 /**
  * Main template for JComments. Don't change it without serious reasons ;)

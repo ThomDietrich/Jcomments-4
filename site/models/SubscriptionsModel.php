@@ -9,10 +9,11 @@
  * @license       GNU/GPL: http://www.gnu.org/copyleft/gpl.html
  */
 
-namespace JcommentsTeam\Component\Jcomments\Site\Model;
+namespace JcommentsTeam\Component\Jcomments\Site\Models;
 
 defined('_JEXEC') or die;
 
+use JcommentsTeam\Component\Jcomments\Site\classes\JCommentsFactory;
 use Joomla\CMS\Cache\CacheControllerFactoryInterface;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
